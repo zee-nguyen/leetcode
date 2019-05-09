@@ -18,6 +18,8 @@ class Solution:
         return count
 
 test = Solution()
-J = "aA"
-S = "aAAbbbb"
+# J = "aA"
+# S = "aAAbbbb"
+J = "z"
+S = "ZZ"
 print(test.numJewelsInStones(J, S))
