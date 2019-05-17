@@ -1,5 +1,6 @@
-# Two linked lists that intersect at some point
-# Different length. Find the first intersection 
+# Name: Phuong Nguyen (Zee)
+# Homework 1 - CS5800 
+# Problem 1
 
 class Node:
     def __init__(self, data = None, next = None):
@@ -10,7 +11,6 @@ class Node:
         return self.next
 
 class Solution:
-    # size of LL
     def size_ll(self, head: Node) -> int:
         count = 0
         temp = head
@@ -19,65 +19,29 @@ class Solution:
             temp = temp.get_next()
         return count
 
-    '''
+    def ll_intersection(self, headA: Node, headB: Node) -> Node:
+        '''
         Function: ll_intersection
         Params: headA, headB are the head node of two linked lists
         return: the first node that list A and list B intersects
-    '''
-    def ll_intersection(self, headA: Node, headB: Node) -> Node:
-        # find length of each list
+        '''
         lenA = self.size_ll(headA)
         lenB = self.size_ll(headB)
 
-        offset = abs(lenA - lenB)
-        start = Node()
-        shorterLen = 0
-        curA = Node()
-        curB = Node()
+        # assuming len A > len B
+        # curA is always the longer list
+        curA, curB = headA, headB
+        shorterLen = lenB
 
-        if lenA == lenB:
-            curA = headA
-            curB = headB
+        if lenA < lenB:
+            curA, curB = headB, headA
             shorterLen = lenA
-        elif lenA > lenB:
-            shorterLen = lenB
-            temp = headA
-            for i in range(offset):
-                start = temp.next
-                temp = temp.next
-            
-            curA = start
-            curB = headB
-        else:
-            shorterLen = lenA
-            temp = headB
-            for i in range(offset):
-                start = temp.next
-                temp = temp.next
-            curB = start
-            curA = headA
-        
-        for i in range(shorterLen):
-            if (curA.data == curB.data):
+        for i in range(abs(lenA-lenB)):
+            curA = curA.get_next()
+        print(curA.data)
+
+        for j in range(shorterLen):
+            if (curA == curB):
                 return curA.data
-            curA = curA.next
-            curB = curB.next
-
-# ll1: 2 -> 12 -> 22 -> 32 -> 42
-node1 = Node(42)
-node2 = Node(32, node1)
-node3 = Node(22, node2)
-node4 = Node(12, node3)
-node5 = Node(2, node4)
-
-# ll1 = LinkedList(node4)
-
-# ll2: 200 -> 101 -> 99 -> 22 -> 32 -> 42
-node6 = Node(99, node4)
-# node7 = Node(101, node6)
-# node8 = Node(200, node7)
-
-# ll2 = LinkedList(node6)
-
-test = Solution()
-print(test.ll_intersection(node5, node6))
+            curA = curA.get_next()
+            curB = curB.get_next()
