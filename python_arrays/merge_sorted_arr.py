@@ -15,7 +15,7 @@ class Solution:
             return
         i = m - 1
         j = n - 1
-        k = len(nums1) - 1
+        k = m + n - 1
         while (k >= 0):
             if (i < 0): # list 1 is exhausted
                 nums1[k] = nums2[j]
