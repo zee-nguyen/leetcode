@@ -24,3 +24,24 @@ class Solution:
         
         return root
     
+        '''
+            Iterative
+
+            tmp = root
+            while tmp:
+                if val < tmp.val:
+                    # Insert left
+                    if not tmp.left:
+                        tmp.left = TreeNode(val)
+                        return root
+                    else:
+                        tmp = tmp.left
+                else:
+                    if not tmp.right:
+                        tmp.right = TreeNode(val)
+                        return root
+                    else:
+                        tmp = tmp.right
+            # Code gets here if root doesn't exist
+            return TreeNode(val)
+        '''
