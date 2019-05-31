@@ -38,7 +38,6 @@ class Solution:
             shorterLen = lenA
         for i in range(abs(lenA-lenB)):
             curA = curA.get_next()
-        print(curA.data)
 
         for j in range(shorterLen):
             if (curA == curB):
