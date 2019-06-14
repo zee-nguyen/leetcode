@@ -8,23 +8,29 @@
 from typing import List
 
 class Solution:
-    def checkPossibility(self, nums: List[int]) -> bool:
-        inverted_count = 0
-        for i in range(len(nums) - 1):
-            if nums[i] > nums[i+1]:
-                nums[i] = nums[i+1]
-                inverted_count += 1
-        for i in range(len(nums) - 1):
-            # if there still exists inverted pairs or inverted_count > 1
-            if nums[i] > nums[i+1] or inverted_count > 1:
-                return False
-        return True
+    def checkPossibility(self, A: List[int]) -> bool:
+        # check if arr is mono increasing
+        def monoIncreasing(arr):
+            for i in range(len(arr)-1):
+                if arr[i] > arr[i+1]:
+                    return False
+            return True
 
-# A = [4, 2, 3]
+        new = A[:] # make a copy of nums
+        for i in range(len(A)):
+            new[i] = A[i-1] if i>0 else float("-inf")
+            if monoIncreasing(new):
+                return True
+            new[i] = A[i]
+        
+        return False
+            
+        
+
+# A = [4, 2, 3] 
 # A = [3, 4, 2, 3]
 # A = [1,5,4,6,7,10,8,9]
 # A = [1, 2, 3, 1, 3]
-A = [2,3,3,2,4]
-2,3,2,2,4
+# A = [2,3,3,2,4] - T
 test = Solution()
 print(test.checkPossibility(A))
