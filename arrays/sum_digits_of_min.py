@@ -6,10 +6,8 @@ from typing import List
 
 class Solution:
     def sumOfDigits(self, A: List[int]) -> int:
-        smallest = float("inf")
+        smallest = min(A)
         sumDigits = 0
-        for i in A:
-            smallest = min(smallest, i)
 
         while(smallest):
             sumDigits += smallest % 10
