@@ -7,25 +7,31 @@ from typing import List
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        def isSafe(grid, visited, r, c):
+        def isSafe(visited, r, c):
             '''
             Determine whether a given ceil is safe to include in dfs.
             A ceil is safe when it is within bound, a '1', and not visited.
             '''
-            return r >= 0 and c >= 0 and r < len(grid) and c < len(grid[0]) and \
-                grid[r][c] and not visited[r][c]
+            return r >= 0 and c >= 0 and r < len(grid) and c < len(grid[0]) and\
+                grid[r][c] == "1" and not visited[r][c]
 
         def dfs(visited, r, c):
             '''
             Recursive DFS procedure.
             '''
-            visited[r][c] = True
-            neighborRow = [-1, -1, -1, 0, 0, 1, 1, 1]
-            neighborCol = [-1, 0, 1, -1, 1, -1, 0, 1]
+            stack = []
+            stack.append((r, c))
+            neighborRow = [-1, 0, 1, 0]
+            neighborCol = [0, 1, 0, -1]
 
-            for k in range(8):
-                if isSafe(grid, visited, r+neighborRow[k], c+neighborCol[k]):
-                    dfs(visited, r+neighborRow[k], c+neighborCol[k])
+            while (len(stack)):
+                u = stack[-1]
+                visited[u[0]][u[1]] = True
+                stack.pop()
+                
+                for k in range(4):
+                    if isSafe(visited, u[0]+neighborRow[k], u[1]+neighborCol[k]):
+                        stack.append((u[0]+neighborRow[k], u[1]+neighborCol[k]))
 
         if not grid:
             return 0
@@ -38,7 +44,7 @@ class Solution:
 
         for r in range(rows):
             for c in range(cols):
-                if not visited[r][c] and grid[r][c]:
+                if not visited[r][c] and grid[r][c]=="1":
                     dfs(visited, r, c)
                     count += 1
         
@@ -46,10 +52,14 @@ class Solution:
 
 
 test = Solution()
+grid = [["1","1","0","0","0"],
+        ["1","1","0","0","0"],
+        ["0","0","1","0","0"],
+        ["0","0","0","1","1"]]
 # grid = [[1,1,1,1,0], [1,1,0,1,0], [1,1,0,0,0], [0,0,0,0,0]]
-grid = [[1, 1, 0, 0, 0], 
-        [0, 1, 0, 0, 1], 
-        [1, 0, 0, 1, 1], 
-        [0, 0, 0, 0, 0], 
-        [1, 0, 1, 0, 1]]
+# grid = [[1, 1, 0, 0, 0], 
+#         [0, 1, 0, 0, 1], 
+#         [1, 0, 0, 1, 1], 
+#         [0, 0, 0, 0, 0], 
+#         [1, 0, 1, 0, 1]]
 print(test.numIslands(grid))
