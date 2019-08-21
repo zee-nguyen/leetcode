@@ -20,6 +20,9 @@ class Solution(object):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
+        if headA is None or headB is None:
+            return None
+            
         lenA = self.getLength(headA)
         lenB = self.getLength(headB)
         
