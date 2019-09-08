@@ -1,15 +1,15 @@
-// https://leetcode.com/problems/valid-palindrome/
+# https://leetcode.com/problems/valid-palindrome/
 
-// Observation:
-// Since we're only looking at alphanumeric characters, we need to process the input string to get rid of what doesn't qualify
-// Then, we can run 2 pointers to check if the pre-processed string is a palindrome
-// while left < right: 
-// if two pointers are the same, increment left and decrement right 
-// if they're different, return False since this is not a palindrome
-// at the end, if two pointers cross and the program doesn't return false, then this is a valid palinrome
+# Observation:
+# Since we're only looking at alphanumeric characters, we need to process the input string to get rid of what doesn't qualify
+# Then, we can run 2 pointers to check if the pre-processed string is a palindrome
+# while left < right: 
+# if two pointers are the same, increment left and decrement right 
+# if they're different, return False since this is not a palindrome
+# at the end, if two pointers cross and the program doesn't return false, then this is a valid palinrome
 
-// Afterthought:
-// Some part can be enhanced as below
+# Afterthought:
+# Some part can be enhanced as below
 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
