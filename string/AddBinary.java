@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/add-binary/
 
+// In Java, "" is for string. '' is for char.
+
 class AddBinary {
     public String addBinary(String a, String b) {
         int carry = 0;
