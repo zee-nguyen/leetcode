@@ -10,6 +10,7 @@ class MergeIntervals {
         int[] cur = intervals[0];
         List<int[]> res = new ArrayList<>();
         
+        // can use for each loop here
         for (int i = 1; i < intervals.length; i++) {
             if (this.isOverlapped(cur, intervals[i])) {
                 cur = this.mergeTwoIntervals(cur, intervals[i]);
@@ -20,14 +21,15 @@ class MergeIntervals {
         }
         res.add(cur);
         
-        int[][] result = new int[res.size()][2];
+        // int[][] result = new int[res.size()][2];
         
-        for (int j = 0; j < res.size(); j++) {
+        // for (int j = 0; j < res.size(); j++) {
             // System.out.println(res.get(j));
-            result[j] = res.get(j);
-        }
+            // result[j] = res.get(j);
+        // }
         
-        return result;
+        // return result;
+        return res.toArray(new int[res.size()][]);
     }
     
     // i1 and i2 are sorted by starting time
