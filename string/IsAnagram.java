@@ -2,27 +2,46 @@
 
 class IsAnagram {
     public boolean isAnagram(String s, String t) {
-        if (s == null || s == "" || t == null || t == "") {
+        // if (s == null || s == "" || t == null || t == "") {
+        //     return false;
+        // }
+
+        // If they're anagram, must have the same length
+        if (s.length() != t.length()) {
             return false;
         }
         
-        // build a count of all char in s
-        Map<Character, Integer> count = new HashMap<>();
+        int[] count = new int[26];
+        
+        // get count of all characters in s
+        // for (int i = 0; i < s.length(); i++) {
+        //     count[s.charAt(i) - 'a']++;
+        // }
+        
+        // for (int j = 0; j < t.length(); j++) {
+        //     if (count[t.charAt(j) - 'a'] <= 0) {
+        //         return false; // this char is not in s
+        //     }
+        // }
+        
+        // now we know all char in t must be in s
+        // decrement count
+        // for (int j = 0; j < t.length(); j++) {
+        //     count[t.charAt(j) - 'a']--;
+        // }
+
+        // INSTEAD OF ALL THE LOOPS ABOVE
+        // For each char in s, increment
+        // for each char in t, decrement
+        // in the end the array should only contain 0
+
         for (int i = 0; i < s.length(); i++) {
-            count.put(s.charAt(i), count.getOrDefault(s.charAt(i), 0) + 1);
-        }
-        for (int j = 0; j < t.length(); j++) {
-            // if char isn't in map or it is in map but count is 0 -> false
-            if (!count.containsKey(t.charAt(j)) || count.get(t.charAt(j)) == 0) {
-                return false;
-            }
-            
-            // else, decrement count
-            count.put(t.charAt(j), count.get(t.charAt(j)) - 1);
+            count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
         }
         
-        for (Map.Entry<Character, Integer> entry : count.entrySet()) {
-            if (entry.getValue() > 0) {
+        for (int k = 0; k < count.length; k++) {
+            if (count[k] != 0) {
                 return false;
             }
         }
