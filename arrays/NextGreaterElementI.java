@@ -13,29 +13,31 @@
 
 class NextGreaterElementI {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        int n = nums1.length;
-        int m = nums2.length;
-        int[] res = new int[n];
-        
-        for (int i = 0; i < n; i++) {
-            if (nums1[i] == nums2[m-1]) {
-                res[i] = -1;
-            }
+        public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+            // Improving upon brute force
+            // We can preprocess the data to find the next greater number of each element using a stack
             
-            for (int j = 0; j < m; j++) {
-                if (nums1[i] == nums2[j]) {
-                    for (int k = j+1; k < m; k++) {
-                        if (nums2[k] > nums1[i]) {
-                            res[i] = nums2[k];
-                            break;
-                        } else {
-                            res[i] = -1;
-                        }
-                    }
+            // Put all elements in n1 into a map with form [value, next_greater_number]
+            Map<Integer, Integer> map = new HashMap<>();
+            Stack<Integer> stack = new Stack<>();
+            
+            for (int i = 0; i < nums2.length; i++) {
+                while (!stack.isEmpty() && nums2[i] > stack.peek()) {
+                    map.put(stack.pop(), nums2[i]);
                 }
+                stack.push(nums2[i]);
             }
             
+            while (!stack.isEmpty()) {
+                map.put(stack.pop(), -1);
+            }
+            
+            int[] res = new int[nums1.length];
+            for (int i = 0; i < nums1.length; i++) {
+                res[i] = map.get(nums1[i]);
+            }
+            
+            return res;
         }
-        return res;
     }
 }
