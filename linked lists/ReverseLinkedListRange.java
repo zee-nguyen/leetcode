@@ -16,6 +16,11 @@ High-level:
 - start reversing when i <= C
 - prev always has the head of the reversed LL
 - edge cases: list is null, when we reverse from the front of the list...
+
+- Runtime: O(N) where N is the number of nodes in the LL. 
+    (Worst case we need to look at every item once)
+- Space: O(1) since we just need a couple pointers.
+
 */
 
 public class Solution {
