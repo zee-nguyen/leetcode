@@ -42,14 +42,13 @@ class FirstMissingPositive {
         // create a count map for all items in A from 1 to max value
         // first positive number with value of 0 is the missing one.
         // careful about indexing
-        int max = 0;
-        for (int num : A) {
-            if (num > max) {
-                max = num;
-            }
+        int max = Arrays.stream(A).max().getAsInt();
+
+        if (max < 1) {
+            return 1;
         }
 
-        int[] map = new int[max + 1];
+        int[] map = new int[max];
         for (int num: A) {
             if (num >= 1) {
                 map[num - 1]++;
@@ -57,18 +56,20 @@ class FirstMissingPositive {
         }
 
         // map from 0 onwards. If the input array only contains negative numbers then we'll be able to return 1.
-        for (int i = 0; i < map.length; i++) {
+        int i;
+        for (i = 0; i < map.length; i++) {
             if (map[i] == 0) {
                 return i + 1;
             }
         }
-        return -1;
+        // if all values from 1 to max are present, at this point, i = max so we want to return the next number
+        return i + 1;
     }
 
     public static void main(String[] args) {
         FirstMissingPositive obj = new FirstMissingPositive();
-        int[] input = {6};
-//        int[] input = {-1,1,3,0,2,4,3,-2,6,9,15,4};
+//        int[] input = {6};
+        int[] input = {1,2,3,5,6,7, 9};
         System.out.println(obj.firstMissingPositive(input));
     }
 }
