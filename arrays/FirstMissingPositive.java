@@ -9,8 +9,9 @@ is not present is the first missing positive.
 
 ===== O(n) time, O(n) space using Array/HashMap
 
-- Using hashmap, we can put all values in the array into the map, then iterate from 1 to n, if a value is not in the map,
-return it. Else, when we reach n and all values are in the map, the first missing positive is n + 1.
+- Using hashmap, we can put all values in the array into the map, then iterate from 1 to max value (of the array,
+if a value is not in the map, return it. Else, when we reach n and all values are in the map,
+the first missing positive is max + 1.
 
 - We can also use an array to keep count.
     - What is the length of the array? It is the max value in the given input array, because all possible values will be
@@ -33,24 +34,22 @@ class FirstMissingPositive {
         }
 
         int mx = Arrays.stream(nums).max().getAsInt();
-
         if (mx <= 0) {
             return 1;
         }
 
-        int[] count = new int[mx];
+        Map<Integer, Integer> count = new HashMap<>();
         for (int num : nums) {
             if (num > 0) {
-                count[num - 1]++;
+                count.put(num, count.getOrDefault(num, 0) + 1);
             }
         }
 
-        for (int i = 0; i < count.length; i++) {
-            if (count[i] == 0) {
-                return i + 1;
+        for (int i = 1; i < mx + 1; i++) {
+            if (!count.containsKey(i)) {
+                return i;
             }
         }
-
         return mx + 1;
     }
 }
