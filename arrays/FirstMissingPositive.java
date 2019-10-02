@@ -9,9 +9,12 @@ is not present is the first missing positive.
 
 ===== O(n) time, O(n) space using Array/HashMap
 
-- Using hashmap, we can put all values in the array into the map, then iterate from 1 to max value (of the array,
-if a value is not in the map, return it. Else, when we reach n and all values are in the map,
-the first missing positive is max + 1.
+- Using hashmap, we can put all values in the array into the map, then iterate from 1 to n, if a value is not in the map,
+return it. Else, when we reach n and all values are in the map, the first missing positive is n + 1.
+    - Why is it n and not max value in the array? The only time max and length are equal is when all values from 1 to n
+    are present in the array.
+    - If mx = 7 and n = 4 for example, we only need to loop through [1..4] because some values must be missing before
+    we even reach 7.
 
 - We can also use an array to keep count.
     - What is the length of the array? It is the max value in the given input array, because all possible values will be
@@ -40,16 +43,22 @@ class FirstMissingPositive {
 
         Map<Integer, Integer> count = new HashMap<>();
         for (int num : nums) {
-            if (num > 0) {
-                count.put(num, count.getOrDefault(num, 0) + 1);
+            // can also takes care of duplicate by checking if hashmap already have that value
+            if (num > 0 && !count.containsKey(num)) {
+                // We don't even need to worry about how many times a number appears, only if it appears
+                // So no need to update count, just set it to 1
+                // count.put(num, count.getOrDefault(num, 0) + 1);
+                count.put(num, 1);
             }
         }
 
-        for (int i = 1; i < mx + 1; i++) {
+//        for (int i = 1; i < mx + 1; i++) {
+        int n = nums.length;
+        for (int i = 1; i < n + 1; i++) {
             if (!count.containsKey(i)) {
                 return i;
             }
         }
-        return mx + 1;
+        return n + 1;
     }
 }
