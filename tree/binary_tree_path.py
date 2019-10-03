@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/binary-tree-paths/
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
@@ -7,27 +9,30 @@
 
 class Solution:
     def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        # Iterative
         if not root:
             return []
         
-         # recursive
-        def build_path(node, path, ret):
-            if not node:
-                return
-            
-            if not node.left and not node.right: #at leaf, add and append to ret
-                path += str(node.val)
-                ret.append(path)
-            else:
-                path += str(node.val) + "->"
-                
-                if node.left:
-                    build_path(node.left, path, ret)
-                if node.right:
-                    build_path(node.right, path, ret)
-            
         ret = []
-        path = ""
-        build_path(root, path, ret)
+        nodes = []
+        paths = []
+        
+        nodes.append(root)
+        paths.append(str(root.val))
+        
+        while nodes:
+            top = nodes.pop()
+            cur = paths.pop()
+            
+            if not top.left and not top.right: #leaf
+                ret.append(cur)
+            else:
+                if top.right:
+                    nodes.append(top.right)
+                    paths.append(cur + "->" + str(top.right.val))
+                if top.left:
+                    nodes.append(top.left)
+                    paths.append(cur + "->" + str(top.left.val))
         
         return ret
+                
