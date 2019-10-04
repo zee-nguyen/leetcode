@@ -10,7 +10,7 @@ class Node:
 class Solution:
     def postorder(self, root: 'Node') -> List[int]:
         # Iterative
-        # The idea is to have rioot - right - left using a stack, then reverse the list
+        # The idea is to have root - right - left using a stack, then reverse the list
         if not root:
             return []
         
@@ -20,7 +20,6 @@ class Solution:
             top = stack.pop()
             if top:
                 ret.append(top.val)
-            for c in top.children:
-                stack.append(c)
+            stack.extend(top.children)
         
         return ret[::-1]
