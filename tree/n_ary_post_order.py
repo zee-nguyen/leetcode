@@ -9,12 +9,18 @@ class Node:
 """
 class Solution:
     def postorder(self, root: 'Node') -> List[int]:
+        # Iterative
+        # The idea is to have rioot - right - left using a stack, then reverse the list
         if not root:
             return []
-        ret = []
         
-        for child in root.children:
-            ret.extend(self.postorder(child))
+        stack, ret = [root], []
         
-        ret.append(root.val)
-        return ret
+        while stack:
+            top = stack.pop()
+            if top:
+                ret.append(top.val)
+            for c in top.children:
+                stack.append(c)
+        
+        return ret[::-1]
