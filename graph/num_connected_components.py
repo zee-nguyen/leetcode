@@ -12,28 +12,28 @@ Main idea:
 
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        visited = [False for i in range(n)]
-        cc = 0 
-        dfs = [] # stack
+        visited = [False] * n
+        ans = 0
         
-        # adj list
-        adj_list = [[] for i in range(n)]
+        adj_list = {i: [] for i in range(n)}
         for start, end in edges:
             adj_list[start].append(end)
             adj_list[end].append(start)
             
         for i in range(n):
-            if not visited[i]:
-                dfs.append(i)
-                cc += 1
-        
+            if visited[i]:
+                continue
+            
+            ans += 1
+            dfs = [i]
+            visited[i] = True
+            
             while dfs:
-                top = dfs.pop()
-                visited[top] = True
-
-                for neighbor in adj_list[top]:
+                node = dfs.pop()
+                for neighbor in adj_list[node]:
                     if not visited[neighbor]:
+                        visited[neighbor] = True
                         dfs.append(neighbor)
-        
-        return cc
+                        
+        return ans
             
