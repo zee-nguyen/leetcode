@@ -9,13 +9,13 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if root is p or root is q: # root is either p or q, then it is LCA
-            return root
-        elif (p.val < root.val and q.val > root.val) or (p.val > root.val and q.val < root.val): # different subtree, then root is LCA
-            return root
-        else: #same subtree
-            if p.val < root.val and q.val < root.val:
+        """ 
+        RT: O(N) since in the worst case we need to check all elements
+        Space: O(N) if the BST is skewed
+         """
+        if p.val < root.val and q.val < root.val:
                 return self.lowestCommonAncestor(root.left, p, q)
-            else:
+        elif p.val > root.val and q.val > root.val:
                 return self.lowestCommonAncestor(root.right, p, q)
-        
+        else:
+            return root
