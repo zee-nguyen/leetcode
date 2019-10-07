@@ -39,3 +39,14 @@ class Solution:
             ret.append(s2.pop().val)
             
         return ret
+
+
+        # Recursive
+        # if not root:
+        #     return []
+
+        # ret = []
+        # for c in root.children:
+        #     ret.extend(self.postorder(c))
+        # ret.append(root.val)
+        # return ret
