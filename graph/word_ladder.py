@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/word-ladder/
 
+""" TLE since it takes O(n^2) to model the graph """
+
 from collections import deque
 
 
