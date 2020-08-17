@@ -3,6 +3,7 @@ import itertools
 
 class MaxSumSubarrays:
     def brute_force(self, A) -> int:
+        ''' O (n^3)'''
         mx = float("-inf")
         for i in range(len(A)):
             for j in range(i+1, len(A)):
@@ -11,6 +12,17 @@ class MaxSumSubarrays:
                     total += A[k]
                 mx = max(total, mx)
         return mx
+
+    def improved_brute_force(self, A) -> int:
+        ''' O (n^2) runtime + O(n) space'''
+        S = itertools.accumulate(A)
+        mx = 0
+        mn = 0
+        for i in S:
+                mn = min(mn, i)
+                mx = max(mx, i - mn)
+        return mx
+            
 
     # def dp(self, A) -> int:
     #     min_sum = max_sum = 0
@@ -22,4 +34,4 @@ class MaxSumSubarrays:
 
 test = MaxSumSubarrays()
 A = [904, 40, 523, 12, -335, -385, -124, 481, -31]
-print(test.brute_force(A))
+print(test.improved_brute_force(A))

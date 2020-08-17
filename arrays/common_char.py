@@ -7,6 +7,7 @@
 # 1 <= A[i].length <= 100
 # A[i][j] is a lowercase letter
 
+# ========== DONE
 from typing import List
 
 class Solution:

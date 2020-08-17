@@ -3,6 +3,7 @@
 # Your function should return true if any value appears at least twice in the 
 # array, and it should return false if every element is distinct.
 
+# ========== DONE
 from typing import List
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
@@ -15,8 +16,8 @@ class Solution:
         return len(s) != len(nums)
 
 
-# A = [1, 2, 3, 1]
+A = [1, 2, 2, 1]
 # A = [1,1,1,3,3,4,3,2,4,2]
-A = [1, 2, 3, 4]
+# A = [1, 2, 3, 4]
 test = Solution()
 print(test.containsDuplicate(A))   

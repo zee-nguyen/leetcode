@@ -45,6 +45,7 @@ class Solution:
                     graph[words[i]].append(words[j])
                     graph[words[j]].append(words[i])
         
+        # print(graph)
         visited = {}
 
         visited[start] = True
@@ -55,8 +56,8 @@ class Solution:
 
 
 start = "cat"
-end = "boy"
-words = ["cat", "bay", "bat", "faces", "cot", "cit", "boy"]
+end = "bay"
+words = ["cat", "bay", "bat", "faces", "cot", "cit", "boy", "tat", "tay"]
 
 obj = Solution()
 print(obj.word_ladder(start, end, words))
