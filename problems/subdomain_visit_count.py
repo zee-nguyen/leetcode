@@ -14,4 +14,5 @@ class Solution:
             for i in range(len(domain)):
                 if domain[i] == '.':
                     tracks[domain[i+1:]] += count
-        return [str(v) + ' ' + k for k, v in tracks.items()]
+        # return [str(v) + ' ' + k for k, v in tracks.items()]
+        return ['%s %s' % (tracks[k], k) for k in tracks]
