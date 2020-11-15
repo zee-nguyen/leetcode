@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/max-difference-you-can-get-from-changing-an-integer/
 
 class Solution:
-    def maxDiff(self, num: int) -> int:
+    def maxDiff(self, num: int) -> int: 
         digits = [int(n) for n in str(num)]
         len_d = len(digits)
         a = [n for n in digits]
@@ -9,24 +9,24 @@ class Solution:
         x = -1
         y = -1
         first = False
+        foundX = False
+        foundY = False
         
-        # find x
+        # find x and Y
         for i in range(len_d):
-            if digits[i] < 9:
+            if digits[i] < 9 and not foundX:
                 x = digits[i]
-                break
+                foundX = True
+            if digits[i] > 1 and not foundY:
+                y = digits[i]
+                if i == 0:
+                    first = True
+                foundY = True
+        
         # update all occurences
         for i, num in enumerate(a):
             if num == x:
                 a[i] = 9
-        
-        #find y
-        for i in range(len_d):
-            if digits[i] > 1:
-                if i == 0:
-                    first = True
-                y = digits[i]
-                break
         
         # update all occurences
         for i, num in enumerate(b):
