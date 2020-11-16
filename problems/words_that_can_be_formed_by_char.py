@@ -7,6 +7,6 @@ class Solution:
         res = 0
         for word in words:
             w_count = collections.Counter(word)
-            if w_count & ch_count == w_count:
+            if all(w_count[c] <= ch_count[c] for c in w_count):
                 res += len(word)
         return res
