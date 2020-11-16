@@ -12,7 +12,6 @@ class Solution:
         while cur:
             # keep check next while it's equal current
             while cur.next and cur.val == cur.next.val:
-                tmp = cur.next.next 
-                cur.next = tmp
+                cur.next = cur.next.next 
             cur = cur.next 
         return head
